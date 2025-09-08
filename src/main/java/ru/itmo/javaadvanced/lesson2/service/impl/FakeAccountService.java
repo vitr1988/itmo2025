@@ -20,6 +20,11 @@ public class FakeAccountService implements AccountService {
     }
 
     @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
     public BigDecimal getBalance(String accountNumber) {
         return null;
     }
