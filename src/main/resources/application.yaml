@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: itmo
+  main:
+    banner-mode: off
+
+itmo:
+  num_value: 5
+  str_value: "Hello World"
+  res_value: 'classpath:test.txt'
+  flag: true

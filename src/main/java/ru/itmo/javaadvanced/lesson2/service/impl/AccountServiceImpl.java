@@ -2,9 +2,9 @@ package ru.itmo.javaadvanced.lesson2.service.impl;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.itmo.javaadvanced.lesson2.dao.AccountDao;
 import ru.itmo.javaadvanced.lesson2.service.AccountService;
 import ru.itmo.javaadvanced.lesson2.service.PrintService;
@@ -13,21 +13,26 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import static ru.itmo.javaadvanced.lesson2.dao.impl.AccountDaoImpl.ACCOUNTS;
+import static ru.itmo.javaadvanced.lesson2.service.impl.AccountServiceImpl.ACCOUNT_SERVICE_IMPL;
 
-@Component
+@Service(ACCOUNT_SERVICE_IMPL)
 @Primary
-//@Scope("prototype") // каждое обращение к бину будет инициировать создание нового объекта
+//@Scope(SCOPE_PROTOTYPE) // каждое обращение к бину будет инициировать создание нового объекта
 //@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AccountServiceImpl implements AccountService {
 
+    public static final String ACCOUNT_SERVICE_IMPL = "accountServiceImpl";
+
     //    @Setter(onMethod_ = @Autowired)
     private final AccountDao accountDao;
-    private final PrintService printService;
+    private final ApplicationContext applicationContext;
+//    private final PrintService printService;
 
     public AccountServiceImpl(//@Qualifier("dbAccountDao")
-                              Map<String, AccountDao> accountDao, PrintService printService) {
+                              Map<String, AccountDao> accountDao, ApplicationContext applicationContext) {
         this.accountDao = accountDao.values().stream().findFirst().get();
-        this.printService = printService;
+        this.applicationContext = applicationContext;
+//        this.printService = printService;
     }
 
     @PostConstruct
@@ -45,13 +50,13 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deposit(String accountNumber, BigDecimal amount) {
         accountDao.deposit(accountNumber, amount);
-        printService.print(getBalance(accountNumber) + "");
+//        printService.print(getBalance(accountNumber) + "");
     }
 
     @Override
     public void withdraw(String accountNumber, BigDecimal amount) {
         accountDao.withdraw(accountNumber, amount);
-        printService.print(getBalance(accountNumber) + "");
+//        printService.print(getBalance(accountNumber) + "");
     }
 
     @Override
@@ -61,7 +66,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public int getId() {
-        return printService.getId();
+//        return printService.getId();
+        return applicationContext.getBean(PrintService.class).getId();
     }
 
     //    public static AccountService getInstance() {

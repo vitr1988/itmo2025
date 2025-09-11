@@ -5,9 +5,13 @@ import ru.itmo.javaadvanced.lesson2.service.AccountService;
 
 import java.math.BigDecimal;
 
+import static ru.itmo.javaadvanced.lesson2.service.impl.FakeAccountService.FAKE_SERVICE;
+
 //@Primary
-@Component("fakeService")
+@Component(FAKE_SERVICE)
 public class FakeAccountService implements AccountService {
+
+    public static final String FAKE_SERVICE = "fakeService";
 
     @Override
     public void deposit(String accountNumber, BigDecimal amount) {

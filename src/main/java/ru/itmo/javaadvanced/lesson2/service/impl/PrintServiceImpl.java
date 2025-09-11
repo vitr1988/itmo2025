@@ -1,15 +1,17 @@
 package ru.itmo.javaadvanced.lesson2.service.impl;
 
-import ch.qos.logback.core.testUtil.RandomUtil;
 import lombok.Getter;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import ru.itmo.javaadvanced.lesson2.service.PrintService;
 
 import java.util.Random;
 
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
 @Component
-@Scope("prototype")
+@Scope(value = SCOPE_PROTOTYPE)
 public class PrintServiceImpl implements PrintService {
 
     @Getter

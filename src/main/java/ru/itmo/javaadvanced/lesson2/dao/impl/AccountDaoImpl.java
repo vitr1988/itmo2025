@@ -12,7 +12,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AccountDaoImpl implements AccountDao {
 
-    private final String ivanov;
+//    private final String ivanov;
 
     public static final Map<String, BigDecimal> ACCOUNTS = new HashMap<>();
 
