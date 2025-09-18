@@ -1,6 +1,6 @@
-package ru.itmo.spring_database.dao;
+package ru.itmo.jpa.dao;
 
-import ru.itmo.spring_database.model.Student;
+import ru.itmo.jpa.model.Student;
 
 import java.util.List;
 import java.util.Optional;

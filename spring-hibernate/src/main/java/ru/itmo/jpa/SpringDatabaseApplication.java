@@ -1,11 +1,10 @@
-package ru.itmo.spring_database;
+package ru.itmo.jpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.itmo.spring_database.dao.GroupDao;
-import ru.itmo.spring_database.dao.StudentDao;
-import ru.itmo.spring_database.model.Group;
+import ru.itmo.jpa.dao.GroupDao;
+import ru.itmo.jpa.dao.StudentDao;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -23,10 +22,10 @@ public class SpringDatabaseApplication {
 //				.toList();
 //		groupDao.deleteAllByIds(ids);
 //		for (Long id : ids) {
-//			groupDao.create(id, "A" + id);
+//			groupDao.create("A" + id);
 //		}
 //
-//		groupDao.updateNameById(5000L, "B5000");
+//		groupDao.updateNameById(5L, "B5000");
 //
 //		groupDao.deleteById(1000L);
 //
@@ -49,7 +48,8 @@ public class SpringDatabaseApplication {
 //		});
 //
 //		studentDao.deleteById(5L);
-
+//
+//		System.out.println(studentDao.findAll());
 		System.out.println(studentDao.findById(4L).orElse(null));
 	}
 
