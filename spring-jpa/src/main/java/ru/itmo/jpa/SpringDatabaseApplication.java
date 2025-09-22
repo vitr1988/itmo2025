@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import ru.itmo.jpa.model.Group;
 import ru.itmo.jpa.model.Student;
@@ -44,7 +43,7 @@ public class SpringDatabaseApplication {
 		groupRepository.deleteById(1000L);
 
 //		Page<Group> first20GroupsPage = groupRepository.findAll(PageRequest.of(0, 20, Sort.Direction.DESC));
-		Page<Group> first20GroupsPage = groupRepository.findAll(OffsetLimitPageable.of(0, 20, Sort.Direction.DESC));
+		Page<Group> first20GroupsPage = groupRepository.findAll(OffsetLimitPageable.of(0, 20, Sort.Direction.DESC, "id"));
 		System.out.println("First 20 groups: " + first20GroupsPage.getContent());
 
 		System.out.println(groupRepository.findById(-1000L));
@@ -60,12 +59,12 @@ public class SpringDatabaseApplication {
 		studentRepository.findById(4L).ifPresent(student -> {
 			studentRepository.assignToGroup(
 					student.getId(),
-					400L //groupRepository.findById(100L).map(Group::getId).orElse(null)
+					4L //groupRepository.findById(100L).map(Group::getId).orElse(null)
 			);
 		});
 
 //		studentRepository.findById(4L).ifPresent(student -> {
-//			student.setGroup(groupRepository.findById(400L).orElse(null));
+//			student.setGroup(groupRepository.findById(4L).orElse(null));
 //			studentRepository.save(student);
 //		});
 

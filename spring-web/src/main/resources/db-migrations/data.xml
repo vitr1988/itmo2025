@@ -1,0 +1,28 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Vitalii Ivanov" id="fill-table-groups">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0"><![CDATA[
+                select count(*) from groups
+                ]]></sqlCheck>
+        </preConditions>
+<!--        <sqlFile relativeToChangelogFile="true" path="groups-data.sql" />-->
+        <insert tableName="groups">
+            <column name="name">A100</column>
+        </insert>
+        <insert tableName="groups">
+            <column name="name">A200</column>
+        </insert>
+        <insert tableName="groups">
+            <column name="name">A300</column>
+        </insert>
+        <insert tableName="groups">
+            <column name="name">A400</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
