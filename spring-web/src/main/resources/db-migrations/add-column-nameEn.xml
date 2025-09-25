@@ -17,4 +17,17 @@
         </addColumn>
     </changeSet>
 
+    <changeSet author="Vitalii Ivanov" id="Create-table-test">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="test" />
+            </not>
+        </preConditions>
+        <createTable tableName="test">
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

@@ -16,3 +16,10 @@ spring:
   liquibase:
     change-log: 'classpath:db-migrations/changelog.xml'
 
+data:
+  criticalValue: 'VALUE'
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: ru.itmo.jpa.controller

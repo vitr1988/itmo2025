@@ -1,8 +1,12 @@
 package ru.itmo.jpa.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 import ru.itmo.jpa.dto.GroupDto;
 import ru.itmo.jpa.mapper.GroupMapper;
 import ru.itmo.jpa.repository.GroupRepository;
@@ -15,6 +19,8 @@ import java.util.Optional;
 public class GroupService {
 
     private final GroupRepository groupRepository;
+
+    private final RestTemplate restTemplate;
 
     private final GroupMapper groupMapper;
 
@@ -34,8 +40,15 @@ public class GroupService {
     }
 
     @Transactional
-    public void deleteGroup(Long id) {
-        groupRepository.deleteById(id);
+    public boolean deleteGroup(Long id) {
+        ResponseEntity<GroupDto> group = restTemplate.getForEntity(
+                "http://localhost:8080/api/groups/%d".formatted(id),
+                GroupDto.class);
+        boolean exist = group.getStatusCode().is2xxSuccessful();
+        if (exist) {
+            groupRepository.deleteById(id);
+        }
+        return exist;
     }
 
     @Transactional(readOnly = true)
