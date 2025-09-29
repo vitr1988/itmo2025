@@ -16,8 +16,8 @@ public class HttpPreFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        if (request.getRequestURI().contains("/api/groups")) {
+//        if (request.getRequestURI().contains("/api/groups")) {
             filterChain.doFilter(request, response);
-        }
+//        }
     }
 }

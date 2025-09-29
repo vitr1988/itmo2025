@@ -7,5 +7,6 @@
     <include file="schema.xml" relativeToChangelogFile="true"/>
     <include file="add-column-nameEn.xml" relativeToChangelogFile="true"/>
     <include file="data.xml" relativeToChangelogFile="true"/>
+    <include file="security.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

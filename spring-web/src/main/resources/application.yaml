@@ -3,7 +3,7 @@ spring:
   main:
     banner-mode: off
   application:
-    name: spring-database
+    name: &applicationName spring-database
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -15,11 +15,26 @@ spring:
       ddl-auto: validate
   liquibase:
     change-log: 'classpath:db-migrations/changelog.xml'
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: *applicationName
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "ru.itmo.jpa.dto"
+      auto-offset-reset: earliest
 
 data:
   criticalValue: 'VALUE'
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-  packages-to-scan: ru.itmo.jpa.controller
+#springdoc:
+#  swagger-ui:
+#    path: /swagger-ui.html
+#  packages-to-scan: ru.itmo.jpa.controller
+
+app:
+  jwt:
+    secret: theSecretLengthMustBeAtLeast256Bits
